@@ -1,7 +1,8 @@
-package com.drohealth.pharmacy
+package com.drohealth.pharmacy.views.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.drohealth.pharmacy.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
