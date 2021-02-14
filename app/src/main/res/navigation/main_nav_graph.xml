@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/storeFragment">
+
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.drohealth.pharmacy.views.ui.store.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment_to_singleStoreFragment"
+            app:destination="@id/singleStoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleStoreFragment"
+        android:name="com.drohealth.pharmacy.views.ui.single.SingleStoreFragment"
+        android:label="fragment_single_store"
+        tools:layout="@layout/fragment_single_store" />
+</navigation>

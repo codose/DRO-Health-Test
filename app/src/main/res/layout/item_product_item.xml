@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/garlic_oil" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Garlic Oil"
+            android:textAppearance="@style/TextAppearance.TextBold"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_image" />
+
+        <TextView
+            android:id="@+id/product_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Garlic Oil"
+            android:textAppearance="@style/TextAppearance.TextRegular"
+            android:textColor="@color/colorGrey"
+            app:layout_constraintEnd_toEndOf="@+id/product_name"
+            app:layout_constraintStart_toStartOf="@+id/product_name"
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+        <TextView
+            android:id="@+id/product_dose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="oral Suspension"
+            android:textAppearance="@style/TextAppearance.TextRegular"
+            android:textColor="@color/colorGrey"
+            app:layout_constraintEnd_toEndOf="@+id/product_type"
+            app:layout_constraintStart_toStartOf="@+id/product_type"
+            app:layout_constraintTop_toBottomOf="@+id/product_type" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/curved_corner_rectangle"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:text="N12000"
+            android:textAppearance="@style/TextAppearance.TextMedium"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/product_dose"
+            app:layout_constraintTop_toBottomOf="@+id/product_dose" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
