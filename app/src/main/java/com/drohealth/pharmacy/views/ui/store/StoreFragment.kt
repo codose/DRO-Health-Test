@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.drohealth.pharmacy.R
 import com.drohealth.pharmacy.databinding.FragmentStoreBinding
+import com.drohealth.pharmacy.utils.hide
+import com.drohealth.pharmacy.utils.show
 import com.drohealth.pharmacy.views.adapter.ProductClickListener
 import com.drohealth.pharmacy.views.adapter.ProductRecyclerAdapter
 
@@ -44,6 +47,17 @@ class StoreFragment : Fragment() {
 
         binding.productRv.adapter = productAdapter
 
+        binding.bagCard.setOnClickListener {
+            findNavController().navigate(StoreFragmentDirections.actionStoreFragmentToBagFragment())
+        }
+
+        binding.searchButton.setOnClickListener {
+            if(binding.searchLayout.isVisible){
+                binding.searchLayout.show()
+            }else{
+                binding.searchLayout.hide()
+            }
+        }
         getDummyList()
     }
 

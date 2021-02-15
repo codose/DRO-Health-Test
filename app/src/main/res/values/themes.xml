@@ -43,6 +43,13 @@
         <item name="android:tint">@null</item>
     </style>
 
+    <style name="ImageButton.Default.White" parent="ImageButton.Default">
+        <item name="android:background">@drawable/btn_oval_white</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:tint">@color/black</item>
+    </style>
+
+
     <style name="ShapeAppearanceOverlay.Card.Media" parent="">
         <item name="cornerSizeTopLeft">24dp</item>
         <item name="cornerSizeTopRight">24dp</item>
@@ -56,5 +63,41 @@
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">16dp</item>
         <item name="android:textAppearance">@style/TextAppearance.TextMedium</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.Primary.White" parent="Widget.MaterialComponents.Button.Primary">
+        <item name="cornerRadius">24dp</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/TextAppearance.TextMedium</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="TextInputBox.Primary" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="startIconTint">@color/black</item>
+        <item name="endIconTint">@color/black</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="boxStrokeColor">@color/colorGrey</item>
+        <item name="boxCornerRadiusBottomStart">24dp</item>
+        <item name="boxCornerRadiusBottomEnd">24dp</item>
+        <item name="boxCornerRadiusTopStart">24dp</item>
+        <item name="boxCornerRadiusTopEnd">24dp</item>
+        <item name="endIconDrawable">@drawable/ic_cancel</item>
+        <item name="hintEnabled">false</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextAppearance">@style/TextAppearance.TextRegular</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.TextRegular</item>
     </style>
 </resources>

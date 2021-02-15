@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_storeFragment_to_singleStoreFragment"
             app:destination="@id/singleStoreFragment" />
+        <action
+            android:id="@+id/action_storeFragment_to_bagFragment"
+            app:destination="@id/bagFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleStoreFragment"
         android:name="com.drohealth.pharmacy.views.ui.single.SingleStoreFragment"
         android:label="fragment_single_store"
-        tools:layout="@layout/fragment_single_store" />
+        tools:layout="@layout/fragment_single_store" >
+        <action
+            android:id="@+id/action_singleStoreFragment_to_bagFragment"
+            app:destination="@id/bagFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bagFragment"
+        android:name="com.drohealth.pharmacy.views.ui.bag.BagFragment"
+        android:label="fragment_bag"
+        tools:layout="@layout/fragment_bag" />
 </navigation>
