@@ -21,10 +21,13 @@
         android:id="@+id/singleStoreFragment"
         android:name="com.drohealth.pharmacy.views.ui.single.SingleStoreFragment"
         android:label="fragment_single_store"
-        tools:layout="@layout/fragment_single_store" >
+        tools:layout="@layout/fragment_single_store">
         <action
             android:id="@+id/action_singleStoreFragment_to_bagFragment"
             app:destination="@id/bagFragment" />
+        <argument
+            android:name="product"
+            app:argType="com.drohealth.pharmacy.model.Product" />
     </fragment>
     <fragment
         android:id="@+id/bagFragment"

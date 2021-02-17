@@ -1,5 +1,7 @@
 package com.drohealth.pharmacy.network.api
 
+import com.drohealth.pharmacy.model.Product
+import com.drohealth.pharmacy.model.ProductResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 
@@ -9,5 +11,8 @@ import retrofit2.http.*
  */
 
 interface ApiService {
+
+    @GET("api/drugs/get")
+    fun getProducts() : Deferred<ProductResponse>
 
 }

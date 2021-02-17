@@ -7,5 +7,5 @@ package com.drohealth.pharmacy.utils
  */
 
 object Constant {
-    const val BASE_URL = "https://dev-api.myt40.com/api/v1/"
+    const val BASE_URL = "https://droh-app.herokuapp.com/index.php/"
 }

@@ -1,19 +1,28 @@
 package com.drohealth.pharmacy.views.ui.store
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.drohealth.pharmacy.R
 import com.drohealth.pharmacy.databinding.FragmentStoreBinding
+import com.drohealth.pharmacy.model.Product
+import com.drohealth.pharmacy.utils.ApiResponse
 import com.drohealth.pharmacy.utils.hide
 import com.drohealth.pharmacy.utils.show
+import com.drohealth.pharmacy.utils.toast
 import com.drohealth.pharmacy.views.adapter.ProductClickListener
 import com.drohealth.pharmacy.views.adapter.ProductRecyclerAdapter
+import com.drohealth.pharmacy.views.viemodel.StoreViewModel
+import timber.log.Timber
 
 
 class StoreFragment : Fragment() {
@@ -23,6 +32,8 @@ class StoreFragment : Fragment() {
     private lateinit var productAdapter : ProductRecyclerAdapter
 
     private lateinit var gridLayoutManager : GridLayoutManager
+
+    private val viewModel by viewModels<StoreViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,12 +48,11 @@ class StoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productAdapter = ProductRecyclerAdapter(requireContext(), ProductClickListener {
-            findNavController().navigate(StoreFragmentDirections.actionStoreFragmentToSingleStoreFragment())
-        })
-
         gridLayoutManager = GridLayoutManager(requireContext(), 2)
 
+        productAdapter = ProductRecyclerAdapter(requireContext(), ProductClickListener {
+            findNavController().navigate(StoreFragmentDirections.actionStoreFragmentToSingleStoreFragment(it))
+        })
         binding.productRv.layoutManager = gridLayoutManager
 
         binding.productRv.adapter = productAdapter
@@ -53,20 +63,68 @@ class StoreFragment : Fragment() {
 
         binding.searchButton.setOnClickListener {
             if(binding.searchLayout.isVisible){
-                binding.searchLayout.show()
-            }else{
                 binding.searchLayout.hide()
+            }else{
+                binding.searchLayout.show()
             }
         }
-        getDummyList()
+
+        setObservers()
     }
 
-    private fun getDummyList() {
-        val list = arrayListOf<String>()
-        for(i in 1..10){
-            list.add("Item $i")
-        }
-        productAdapter.submitList(list)
+    private fun setObservers() {
+        viewModel.products.observe(viewLifecycleOwner, {
+            when (it) {
+                is ApiResponse.Loading -> {
+                    binding.progressBar.show()
+
+                }
+                is ApiResponse.Success -> {
+                    binding.progressBar.hide()
+                    val data = it.data
+                    setProduct(data)
+                    setSearchFunction(data)
+                }
+                is ApiResponse.Failure -> {
+                    binding.progressBar.hide()
+                    requireContext().toast(it.message)
+                }
+            }
+        })
+
+        viewModel.cartCount.observe(viewLifecycleOwner, {
+            binding.bagCount.text = it.toString()
+        })
+    }
+
+    private fun setSearchFunction(data : List<Product>) {
+        binding.searchEdit.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s == null){
+                    setProduct(data)
+                }else{
+                    val newList = data.filter { pr->
+                        pr.name.contains(s.toString(),true)
+                    }
+                    setProduct(newList)
+                }
+
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+    }
+
+    private fun setProduct(data :List<Product>) {
+        binding.itemCount.text = "${data.size} Item(s)"
+        productAdapter.submitList(data)
     }
 
 }

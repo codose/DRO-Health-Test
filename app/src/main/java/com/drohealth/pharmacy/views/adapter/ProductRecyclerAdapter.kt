@@ -7,20 +7,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.drohealth.pharmacy.R
 import com.drohealth.pharmacy.databinding.ItemProductItemBinding
+import com.drohealth.pharmacy.model.Product
 
-class ProductRecyclerAdapter(val context: Context, val clickListener: ProductClickListener) : ListAdapter<String, ProductRecyclerAdapter.ProductViewHolder>(
+class ProductRecyclerAdapter(val context: Context, val clickListener: ProductClickListener) : ListAdapter<Product, ProductRecyclerAdapter.ProductViewHolder>(
     ProductDiffUtilCallback()
 ) {
     inner class ProductViewHolder(val binding : ItemProductItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(
-            item: String,
+            item: Product,
             clickListener: ProductClickListener,
             context: Context){
             binding.root.setOnClickListener {
                 clickListener.onClick(item)
             }
-
+            binding.productName.text = item.name
+            binding.productPrice.text = "${context.getString(R.string.naira)}${item.price}"
+            binding.productType.text = item.type
+            Glide.with(context)
+                    .load(item.imageUrl)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(binding.productImage)
+            binding.productDose.text = item.dispensedIn
         }
     }
 
@@ -42,17 +52,17 @@ class ProductRecyclerAdapter(val context: Context, val clickListener: ProductCli
 }
 
 
-class ProductClickListener(val clickListener: (type : String) -> Unit){
-    fun onClick(type : String) = clickListener(type)
+class ProductClickListener(val clickListener: (type : Product) -> Unit){
+    fun onClick(type : Product) = clickListener(type)
 }
 
-class ProductDiffUtilCallback : DiffUtil.ItemCallback<String>(){
+class ProductDiffUtilCallback : DiffUtil.ItemCallback<Product>(){
 
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem == newItem
     }
 

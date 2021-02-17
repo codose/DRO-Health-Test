@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import com.drohealth.pharmacy.R
 import com.drohealth.pharmacy.databinding.DialogAddBagDialogBinding
 
@@ -22,6 +23,16 @@ class SuccessDialogFragment : DialogFragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val itemName = requireArguments().getString("item_name")
+        binding.item.text = "$itemName has been added to your bag"
+        binding.viewBag.setOnClickListener {
+            findNavController().navigate(R.id.bagFragment)
+            dismiss()
+        }
+
+        binding.done.setOnClickListener {
+            dismiss()
+        }
 
     }
 
