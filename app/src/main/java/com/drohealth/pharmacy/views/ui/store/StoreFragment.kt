@@ -35,6 +35,7 @@ class StoreFragment : Fragment() {
 
     private val viewModel by viewModels<StoreViewModel>()
 
+    private var ascending = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -122,9 +123,28 @@ class StoreFragment : Fragment() {
         })
     }
 
+    private fun setSortFunctionality(data : List<Product>) {
+        binding.sortButton.setOnClickListener {
+            if(ascending){
+                val sorted = data.sortedBy { item ->
+                    item.name
+                }
+                ascending = false
+                setProduct(sorted)
+            }else{
+                val sorted = data.sortedByDescending { item ->
+                    item.name
+                }
+                ascending = true
+                setProduct(sorted)
+            }
+        }
+    }
+
     private fun setProduct(data :List<Product>) {
         binding.itemCount.text = "${data.size} Item(s)"
         productAdapter.submitList(data)
+        setSortFunctionality(data)
     }
 
 }
